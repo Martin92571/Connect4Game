@@ -23,6 +23,12 @@ function startGame () {
 
 function tiedGame () {
     if (tokenCounter === 49) {  //if tokenCounter is equal to 49
+        var gameOver = $('<img src="tiedgame.gif">');
+        var playAgain = $('<button class="playAgain">').text('Play Again');
+        var tiedMessage = $('<p class="tiedMessageText">').text('You both lose!');
+        $('.modalBody').append(gameOver);
+        $('.modalBody').append(playAgain);
+        $('.modalBody').append(tiedMessage);
         showModal();    //show modal with tied game message
         return true;
     }
@@ -49,9 +55,9 @@ function currentPlayerToken(){
 function winner(){
     if(counter >= 0){
         // need to make onclick for play again button
-        var youWon = $('<img src="youwon1.gif">')
-        var playAgain = $('<button class="playAgain">').text('Play Again') 
-        var winnerMsg = $('<p class="winerMsg">').text('Player: '+ currentPlayer)
+        var youWon = $('<img src="youwon1.gif">');
+        var playAgain = $('<button class="playAgain">').text('Play Again');
+        var winnerMsg = $('<p class="winerMsg">').text('Player: '+ currentPlayer);
         $('.modalBody').append(winnerMsg);
         $('.modalBody').append(youWon);
         $('.modalBody').append(playAgain);
