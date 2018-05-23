@@ -1,3 +1,5 @@
+$(document).ready(startGame);
+
 var counter = 0;
 var currentPlayer = 0;
 var playerColor = ['red', 'blue'];
@@ -13,6 +15,10 @@ var currentTokenLocation = [
     ['', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '']
 ];
+
+function startGame () {
+    $('.rows').on('click', 'rowClick', currentPlayerToken());   //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
+}
 
 function currentPlayerToken(){
   lastTokenLocationY=parseInt(this.attr("column"));
