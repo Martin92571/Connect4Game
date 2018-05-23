@@ -24,6 +24,7 @@ function startGame () {
 function tiedGame () {
     if (tokenCounter === 49) {  //if tokenCounter is equal to 49
         showModal();    //show modal with tied game message
+        return true;
     }
 }
 
