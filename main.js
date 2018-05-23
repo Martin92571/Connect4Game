@@ -18,7 +18,7 @@ var currentTokenLocation = [
 ];
 
 function startGame () {
-    $('.rows').on('click', 'rowClick', currentPlayerToken());   //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
+    $('.rows > .rowClick').on('click', currentPlayerToken);   //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
 function tiedGame () {
@@ -35,7 +35,7 @@ function tiedGame () {
 }
 
 function currentPlayerToken(){
-  lastTokenLocationY=parseInt(this.attr("column"));
+  lastTokenLocationY=parseInt($(this).attr("column"));
   for(var x=currentTokenLocation.length-1;x>=0;x--){
      if(currentTokenLocation[x][ColumnPosition]===""){
          currentTokenLocation[x][ColumnPosition]=playerColor[currentPlayer];
