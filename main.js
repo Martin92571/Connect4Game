@@ -23,3 +23,17 @@ function currentPlayerToken(ColumnPosition){
   }
 
 };
+
+
+document.querySelector('#modalButton').addEventListener('click', showModal)
+
+function showModal(){
+    document.querySelector('#modalShadow').style.display = "block"
+}
+
+function winner(){
+    if(counter === 4){
+        showModal()
+
+    }
+}

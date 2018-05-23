@@ -36,3 +36,23 @@
 .blue{
  background: blue;
 }
+
+/* MODAL */
+#modalShadow{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+    display: none;
+}
+#modalBody {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    min-width: 50%;
+    min-height: 50%;
+    background-color: white;
+    transform: translate(-50%, -50%)
+}
