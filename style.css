@@ -22,6 +22,7 @@
 .rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
     display: inline-block;
     border: black solid 1px;
+    margin-right: 5px;
     width: 13%;
     height: 100%;
 
@@ -38,21 +39,31 @@
 }
 
 /* MODAL */
-#modalShadow{
+
+#modal{
     position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .4);
-    display: none;
+    top: 10%; 
+    width: 50%;
+    height: 50%;
+    border:green 3px solid;
 }
+
+
 #modalBody {
-    position: fixed;
+    position: relative;
     left: 50%;
     top: 50%;
     min-width: 50%;
     min-height: 50%;
     background-color: white;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
+}
+
+.reveal{
+    display: none;
+}
+
+.playAgain{
+    position: absolute;
+    text-align: center;
 }
