@@ -1,0 +1,21 @@
+html{
+    margin: 0 auto;
+}
+
+#gameArea{
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+}
+.rows{
+    display: inline-block;
+    height: 50%;
+    width: 100vw;
+}
+.rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
+    display: inline-block;
+    border: black solid 1px;
+    width: 10%;
+    height: 40%;
+    background-color: blue;
+}
