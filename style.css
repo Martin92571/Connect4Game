@@ -1,0 +1,38 @@
+
+
+#gameArea{
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+}
+
+.gameBoard{
+    margin: auto;
+    margin-top: 2%;
+    width: 50%;
+    height: 95%;
+
+}
+.rows{
+    display: inline-block;
+    height: 13%;
+    width: 100%;
+}
+
+.rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
+    display: inline-block;
+    border: black solid 1px;
+    width: 13%;
+    height: 100%;
+
+}
+
+
+/* Player colors */
+.red{
+    background-color: red;
+}
+
+.blue{
+ background: blue;
+}
