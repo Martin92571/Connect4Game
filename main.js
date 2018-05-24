@@ -45,6 +45,7 @@ function tiedGame() {
 }
 
 function currentPlayerToken() {
+    if(modal){return}
     lastTokenLocationY = parseInt($(this).attr("column"));
     for (var x = currentTokenLocation.length - 1; x >= 0; x--) {
         if (currentTokenLocation[x][lastTokenLocationY] === "") {
@@ -54,11 +55,11 @@ function currentPlayerToken() {
         }
 
     }
-    if(!modal) {
+    
         iterateArrayLocation();
         checkConnectFour();
         currentPlayer = -currentPlayer + 1;
-    }
+    
 
 };
 
@@ -181,7 +182,7 @@ function winner() {
 }
 
 function modalWinner(){
-
+    $(".modalBody").empty();
     var youWon = $('<img src="youwon1.gif">');
     var playAgain = $('<button class="playAgain">').text('Play Again');
     var winnerMsg = $('<p class="winerMsg">').text('Player: ' + currentPlayer);
@@ -216,6 +217,7 @@ function iterateArrayLocation() {
 
 function resetGame() {
     counter = 0;
+    currentPlayer = 0;
     tokenCounter = null;
     lastTokenLocationX = null;
     lastTokenLocationY = null;
