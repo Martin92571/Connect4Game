@@ -1,28 +1,31 @@
 
-
+body{
+    overflow: hidden;
+    
+}
 #gameArea{
     margin: 0 auto;
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
     position: relative;
-    margin-top: 2%;
+   
 }
 
 .gameTitle{
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: 'Press Start 2P', cursive;
     text-align: center;
+    margin:1%;
 }
 
 .gameBoard{
-    margin: auto;
-    width: 50%;
-    height: 95%;
-    margin-left: 23%;
+    margin: 0 auto;
+    width: 55%;
+    height: 85%;
     border: 1px solid black;
     padding: 1%;
     display: inline-block;
-    position: absolute;
+    
 
 }
 
@@ -32,28 +35,27 @@
     width: 20%;
     border: indigo 2px solid;
     display: inline-block;
-    position: absolute;
+    
     text-align: center;
 }
 
-#playerTwo{
-    margin-left: 79%;
-}
+
 
 
 .rows{
-    display: inline-block;
+   
     height: 13%;
     width: 100%;
+    margin-top: 0.8%;
+    padding-left: 20px;
 }
 
 .rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
     display: inline-block;
     border: black solid 1px;
-    margin-right: 0.7%;
-    margin-top: 0.5%;
-    border-radius: 80%;
-    width: 13%;
+    margin-right: 3.6%;
+    border-radius: 100%;
+    width: 10%;
     height: 100%;
 
 }
