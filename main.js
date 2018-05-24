@@ -72,7 +72,7 @@ function currentPlayerToken() {
 
 function playerSelection() {
     if (currentPlayer === 0) {
-        var playerOne = $('<h2 class="playerOneTitle">').text('Player 1');
+        var playerOne = $('<h1 class="playerOneTitle">').text('Player 1');
         var chooseImage = $('<p class="chooseImagePOne">').text('Choose color:');
         var playerColorRed = $('<div class="red">');
         var playerColorBlue =$('<div class="blue">');
@@ -81,8 +81,27 @@ function playerSelection() {
         var playerColorOrange =$('<div class="orange">');
         $('.modalBody').append(playerOne);
         $('.modalBody').append(chooseImage);
-        $('.modalBody').append(playerColorRed).css({'height': '10%', 'width': '10%', 'border-radius': '50%', 'color': 'red'});
-
+        $('.modalBody').append(playerColorRed);
+        $('.modalBody').append(playerColorBlue);
+        $('.modalBody').append(playerColorYellow);
+        $('.modalBody').append(playerColorGreen);
+        $('.modalBody').append(playerColorOrange);
+        showModal();
+    } else if (currentPlayer === 1)  {
+        var playerTwo = $('<h1 class="playerTwoTitle">').text('Player 2');
+        var chooseImage = $('<p class="chooseImagePTwo">').text('Choose color:');
+        var playerColorRed = $('<div class="red">');
+        var playerColorBlue =$('<div class="blue">');
+        var playerColorYellow =$('<div class="yellow">');
+        var playerColorGreen =$('<div class="green">');
+        var playerColorOrange =$('<div class="orange">');
+        $('.modalBody').append(playerTwo);
+        $('.modalBody').append(chooseImage);
+        $('.modalBody').append(playerColorRed);
+        $('.modalBody').append(playerColorBlue);
+        $('.modalBody').append(playerColorYellow);
+        $('.modalBody').append(playerColorGreen);
+        $('.modalBody').append(playerColorOrange);
         showModal();
     }
 }
