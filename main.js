@@ -43,7 +43,14 @@ function createGameBoard(){
             row.append(tokens);            
         }
         $(".gameBoard").append(row);
+
     }
+    var modal=$("<div>",{id:"modal",class:"reveal"});
+    var innerModal=$("<div>",{class:"modalBody"});
+    $(modal).append(innerModal);
+    $(".gameBoard").append(modal);
+    $('.rows>.tokenClicked').on('click', currentPlayerToken);
+    $('.rows>.tokenClicked').on("mouseover",hovercolumn)
 }
 
 function tiedGame() {
@@ -59,14 +66,6 @@ function tiedGame() {
         return true;
 
     }
-    var modal=$("<div>",{id:"modal",class:"reveal"});
-    var innerModal=$("<div>",{class:"modalBody"});
-    $(modal).append(innerModal);
-    $(".gameBoard").append(modal);
-    $('.rows>.tokenClicked').on('click', currentPlayerToken);
-    $('.rows>.tokenClicked').on("mouseover",hovercolumn);
-
-
    
 }
 function hovercolumn(){
@@ -97,9 +96,7 @@ function currentPlayerToken() {
         iterateArrayLocation();
         checkConnectFour();
         currentPlayer = -currentPlayer + 1;
-        debugger;
         tokenCounter++;
-        console.log('tiedgame test', tokenCounter);
 
 };
 
