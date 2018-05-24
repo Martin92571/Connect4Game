@@ -20,13 +20,16 @@ var currentTokenLocation = [
 
 function startGame() {
     clickHandler();
+
+    playerSelection();
+
     // createGameBoard();
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
 function clickHandler() {
     $('.rows > .rowClick').on('click', currentPlayerToken);
-    console.log('startgame test ')
+    console.log('startgame test ');
     $('.resetBtn').on('click', resetGame);
 
 
@@ -67,7 +70,22 @@ function currentPlayerToken() {
 
 };
 
+function playerSelection() {
+    if (currentPlayer === 0) {
+        var playerOne = $('<h2 class="playerOneTitle">').text('Player 1');
+        var chooseImage = $('<p class="chooseImagePOne">').text('Choose color:');
+        var playerColorRed = $('<div class="red">');
+        var playerColorBlue =$('<div class="blue">');
+        var playerColorYellow =$('<div class="yellow">');
+        var playerColorGreen =$('<div class="green">');
+        var playerColorOrange =$('<div class="orange">');
+        $('.modalBody').append(playerOne);
+        $('.modalBody').append(chooseImage);
+        $('.modalBody').append(playerColorRed).css({'height': '10%', 'width': '10%', 'border-radius': '50%', 'color': 'red'});
 
+        showModal();
+    }
+}
 
 function checkConnectFour(){
         var xCordinate=lastTokenLocationX;
