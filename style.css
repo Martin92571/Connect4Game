@@ -92,6 +92,12 @@ body{
     background: orange;
 }
 
+.red,.blue,.yellow,.green,.orange{
+    border-radius: 50%;
+    height: 5rem;
+    width: 5rem;
+}
+
 /* MODAL */
 
 #modal{
