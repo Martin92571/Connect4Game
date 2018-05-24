@@ -23,7 +23,7 @@ function startGame() {
 
     playerSelection();
 
-    // createGameBoard();
+    createGameBoard()
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
