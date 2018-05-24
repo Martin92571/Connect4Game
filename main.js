@@ -20,7 +20,10 @@ var currentTokenLocation = [
 
 function startGame() {
     clickHandler();
-    createGameBoard();
+
+    playerSelection();
+
+    // createGameBoard();
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
@@ -29,6 +32,7 @@ function clickHandler() {
 
 
 }
+
 function createGameBoard(){
     for(var x=0;x<currentTokenLocation.length;x++){
         var row=$("<div>",{class:"rows",row:x});
@@ -39,6 +43,20 @@ function createGameBoard(){
             row.append(tokens);            
         }
         $(".gameBoard").append(row);
+
+
+function tiedGame() {
+    if (tokenCounter === 48) {  //if tokenCounter is equal to 48
+        var gameOver = $('<img src="tiedgame.gif">');
+        var playAgain = $('<button class="playAgain">').text('Play Again');
+        var tiedMessage = $('<p class="tiedMessageText">').text('You both lose!');
+        $('.modalBody').append(gameOver);
+        $('.modalBody').append(playAgain);
+        $('.modalBody').append(tiedMessage);
+        showModal();    //show modal with tied game message
+        $('.playAgain').on('click', resetGame);
+        return true;
+
     }
     var modal=$("<div>",{id:"modal",class:"reveal"});
     var innerModal=$("<div>",{class:"modalBody"});
@@ -78,11 +96,47 @@ function currentPlayerToken() {
         iterateArrayLocation();
         checkConnectFour();
         currentPlayer = -currentPlayer + 1;
-    
+        debugger;
+        tokenCounter++;
+        console.log('tiedgame test', tokenCounter);
 
 };
 
-
+function playerSelection() {
+    if (currentPlayer === 0) {
+        var playerOne = $('<h1 class="playerOneTitle">').text('Player 1');
+        var chooseImage = $('<p class="chooseImagePOne">').text('Choose color:');
+        var playerColorRed = $('<div class="red">');
+        var playerColorBlue =$('<div class="blue">');
+        var playerColorYellow =$('<div class="yellow">');
+        var playerColorGreen =$('<div class="green">');
+        var playerColorOrange =$('<div class="orange">');
+        $('.modalBody').append(playerOne);
+        $('.modalBody').append(chooseImage);
+        $('.modalBody').append(playerColorRed);
+        $('.modalBody').append(playerColorBlue);
+        $('.modalBody').append(playerColorYellow);
+        $('.modalBody').append(playerColorGreen);
+        $('.modalBody').append(playerColorOrange);
+        showModal();
+    } else if (currentPlayer === 1)  {
+        var playerTwo = $('<h1 class="playerTwoTitle">').text('Player 2');
+        var chooseImage = $('<p class="chooseImagePTwo">').text('Choose color:');
+        var playerColorRed = $('<div class="red">');
+        var playerColorBlue =$('<div class="blue">');
+        var playerColorYellow =$('<div class="yellow">');
+        var playerColorGreen =$('<div class="green">');
+        var playerColorOrange =$('<div class="orange">');
+        $('.modalBody').append(playerTwo);
+        $('.modalBody').append(chooseImage);
+        $('.modalBody').append(playerColorRed);
+        $('.modalBody').append(playerColorBlue);
+        $('.modalBody').append(playerColorYellow);
+        $('.modalBody').append(playerColorGreen);
+        $('.modalBody').append(playerColorOrange);
+        showModal();
+    }
+}
 
 function checkConnectFour(){
         var xCordinate=lastTokenLocationX;
@@ -94,7 +148,7 @@ function checkConnectFour(){
             direction=0;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="horizontalLeft";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -102,7 +156,7 @@ function checkConnectFour(){
             direction=1;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="verticalUp";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             checkConnectFour();
             break;
@@ -112,7 +166,7 @@ function checkConnectFour(){
             direction=2;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="verticalDown";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -120,7 +174,7 @@ function checkConnectFour(){
             direction=3;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnolTopRight";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             checkConnectFour();
             break;
@@ -130,7 +184,7 @@ function checkConnectFour(){
             direction=4;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnolbottomLeft";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -138,7 +192,7 @@ function checkConnectFour(){
             direction=5;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnolTopLeft";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             checkConnectFour();
             break; 
@@ -148,7 +202,7 @@ function checkConnectFour(){
             direction=6;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnobottomRight";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -156,7 +210,7 @@ function checkConnectFour(){
             direction=7;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="horizontalRight";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             break;            
             }
@@ -174,6 +228,7 @@ function checkDirection(xCordinate,yCordinate,direction){
          yCordinate+=countArrayDirection[direction][1];
          counter++;
         }
+
 }
 
 
