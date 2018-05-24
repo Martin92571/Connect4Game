@@ -47,16 +47,18 @@ function tiedGame() {
 function currentPlayerToken() {
     lastTokenLocationY = parseInt($(this).attr("column"));
     for (var x = currentTokenLocation.length - 1; x >= 0; x--) {
-        if (currentTokenLocation[x][lastTokenLocationY] === "" && !modal) {
+        if (currentTokenLocation[x][lastTokenLocationY] === "") {
             currentTokenLocation[x][lastTokenLocationY] = playerColor[currentPlayer];
             lastTokenLocationX = x;
             break;
         }
 
     }
-    iterateArrayLocation();
-    checkConnectFour();
-    currentPlayer = -currentPlayer + 1;
+    if(!modal) {
+        iterateArrayLocation();
+        checkConnectFour();
+        currentPlayer = -currentPlayer + 1;
+    }
 
 };
 
