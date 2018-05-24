@@ -4,9 +4,10 @@ var counter = 0;
 var tokenCounter = null;
 var currentPlayer = 0;
 var playerColor = ['red', 'blue'];
-var countDirection="horizontalRight";
-var lastTokenLocationX=null;
-var lastTokenLocationY=null;
+var countDirection = "horizontalRight";
+var lastTokenLocationX = null;
+var lastTokenLocationY = null;
+var modal = false;
 var currentTokenLocation = [
     ['', '', '', '', '', '', ''],
     ['', '', '', '', '', '', ''],
@@ -17,14 +18,20 @@ var currentTokenLocation = [
     ['', '', '', '', '', '', '']
 ];
 
-function startGame () {
-    $('.rows > .rowClick').on('click', currentPlayerToken); 
-    console.log('startgame test ')
-
+function startGame() {
+    clickHandler();
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
-function tiedGame () {
+function clickHandler() {
+    $('.rows > .rowClick').on('click', currentPlayerToken);
+    console.log('startgame test ')
+    $('.resetBtn').on('click', resetGame);
+
+
+}
+
+function tiedGame() {
     if (tokenCounter === 49) {  //if tokenCounter is equal to 49
         var gameOver = $('<img src="tiedgame.gif">');
         var playAgain = $('<button class="playAgain">').text('Play Again');
@@ -37,21 +44,25 @@ function tiedGame () {
     }
 }
 
-function currentPlayerToken(){
-  lastTokenLocationY=parseInt($(this).attr("column"));
-  for(var x=currentTokenLocation.length-1;x>=0;x--){
-     if(currentTokenLocation[x][lastTokenLocationY]===""){
-         currentTokenLocation[x][lastTokenLocationY]=playerColor[currentPlayer];
-         lastTokenLocationX=x;
-      break;
-     }
+function currentPlayerToken() {
+    if(modal){return}
+    lastTokenLocationY = parseInt($(this).attr("column"));
+    for (var x = currentTokenLocation.length - 1; x >= 0; x--) {
+        if (currentTokenLocation[x][lastTokenLocationY] === "") {
+            currentTokenLocation[x][lastTokenLocationY] = playerColor[currentPlayer];
+            lastTokenLocationX = x;
+            break;
+        }
 
-  }
-  iterateArrayLocation();
-  checkConnectFour();
-  currentPlayer=-currentPlayer+1;
+    }
+    
+        iterateArrayLocation();
+        checkConnectFour();
+        currentPlayer = -currentPlayer + 1;
+    
 
 };
+
 
 
 function checkConnectFour(){
@@ -132,7 +143,7 @@ function checkConnectFour(){
             }
         
     
-}
+
 
 function checkDirection(xCordinate,yCordinate,direction){
     var countArrayDirection=[[0,1],[0,-1],[-1,0],[1,0],[1,-1],[-1,1],[-1,-1],[1,1]];
@@ -148,37 +159,66 @@ function checkDirection(xCordinate,yCordinate,direction){
 
 
 // made modal pop up automatically once player wins and inside modal body make a play again button
-function winner(){
-  
-    if(counter >= 4){
-      alert("win");
-        // need to make onclick for play again button
-        var youWon = $('<img src="youwon1.gif">');
-        var playAgain = $('<button class="playAgain">').text('Play Again');
-        var winnerMsg = $('<p class="winerMsg">').text('Player: '+ currentPlayer);
-        $('.modalBody').append(winnerMsg);
-        $('.modalBody').append(youWon);
-        $('.modalBody').append(playAgain);
-        showModal();
+function winner() {
+    if (counter >= 4) {
+        modal = true;
+        setTimeout(modalWinner, 2000);
         return true;
     }
 
 }
 
-// functions that removes the class that has display:none 
-function showModal(){
-    $("#modal").removeClass("reveal");
+function modalWinner(){
+    $(".modalBody").empty();
+    var youWon = $('<img src="youwon1.gif">');
+    var playAgain = $('<button class="playAgain">').text('Play Again');
+    var winnerMsg = $('<p class="winerMsg">').text('Player: ' + currentPlayer);
+    $('.modalBody').append(winnerMsg);
+    $('.modalBody').append(youWon);
+    $('.modalBody').append(playAgain);
+    $('.playAgain').on('click', resetGame);
+    showModal();
 }
 
+// functions that removes the class that has display:none 
+function showModal() {
+    $("#modal").removeClass("reveal");
+    $('.playAgain').on('click', hideModal);
 
-function iterateArrayLocation(){
-    var mergedArray = [].concat.apply([],currentTokenLocation);
+}
+
+function hideModal() {
+    $('#modal').addClass("reveal")
+}
+
+function iterateArrayLocation() {
+    var mergedArray = [].concat.apply([], currentTokenLocation);
     console.log(mergedArray);
-    for(x = mergedArray.length-1; x>=0; x--){
-        var clickedLocation = '.rowClick:nth('+(x)+")";
+    for (x = mergedArray.length - 1; x >= 0; x--) {
+        var clickedLocation = '.rowClick:nth(' + (x) + ")";
         console.log('this is the ' + clickedLocation)
         $(clickedLocation).addClass(mergedArray[x]);
     }
 }
 
+
+function resetGame() {
+    counter = 0;
+    currentPlayer = 0;
+    tokenCounter = null;
+    lastTokenLocationX = null;
+    lastTokenLocationY = null;
+    currentTokenLocation = [
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '']
+    ];
+    $('.rowClick').removeClass('red')
+    $('.rowClick').removeClass('blue')
+    modal = false;
+}
 

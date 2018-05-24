@@ -1,29 +1,61 @@
 
-
+body{
+    overflow: hidden;
+    
+}
 #gameArea{
     margin: 0 auto;
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
+    position: relative;
+   
+}
+
+.gameTitle{
+    font-size: 3rem;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    margin:1%;
 }
 
 .gameBoard{
-    margin: auto;
-    margin-top: 2%;
-    width: 50%;
-    height: 95%;
+    margin: 0 auto;
+    width: 55%;
+    height: 85%;
+    border: 1px solid black;
+    padding: 1%;
+    display: inline-block;
+    
 
 }
-.rows{
+
+#playerOne, #playerTwo{
+    font-family: 'Press Start 2P', cursive;
+    height: 50%;
+    width: 20%;
+    border: indigo 2px solid;
     display: inline-block;
+    
+    text-align: center;
+}
+
+
+
+
+.rows{
+   
     height: 13%;
     width: 100%;
+    margin-top: 0.8%;
+    padding-left: 20px;
 }
 
 .rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
     display: inline-block;
     border: black solid 1px;
-    /* margin-right: 5px; */
-    width: 13%;
+    margin-right: 3.6%;
+    border-radius: 100%;
+    width: 10%;
     height: 100%;
 
 }
@@ -41,22 +73,26 @@
 /* MODAL */
 
 #modal{
-    position: fixed;
-    top: 10%; 
-    width: 50%;
-    height: 50%;
-    border:green 3px solid;
+    position: relative;
+    left: 3%;
+    width: 90%;
+    height: 80%;
+    border: green 3px solid;
+    text-align: center;
+    background-color: rgba(50, 50, 50, 0.8);
+    bottom: 90%;
 }
 
-
-#modalBody {
+p.winnerMsg {
+    color: white;
+    font-size: 2em;
     position: relative;
-    left: 50%;
-    top: 50%;
-    min-width: 50%;
-    min-height: 50%;
-    background-color: white;
-    transform: translate(-50%, -50%);
+}
+
+div.modalBody img {
+    width: 50%;
+    display: inline-block;
+    position: relative;
 }
 
 .reveal{
@@ -65,5 +101,15 @@
 
 .playAgain{
     position: absolute;
+    top: 70%;
+    left: 43%;
     text-align: center;
+}
+
+/* Reset Button */
+
+.resetBtn{
+margin-top: 51%;
+margin-left: 47%; 
+margin-bottom: 5%;
 }
