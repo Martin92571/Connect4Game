@@ -64,110 +64,97 @@ function currentPlayerToken() {
 };
 
 
-function checkConnectFour() {
-    var xCordinate = lastTokenLocationX;
-    var yCordinate = lastTokenLocationY;
-    switch (countDirection) {
-        case "horizontalRight":
+
+function checkConnectFour(){
+        var xCordinate=lastTokenLocationX;
+        var yCordinate=lastTokenLocationY;
+        var direction=0;
+        switch(countDirection){
+            case "horizontalRight":
             counter++
-            yCordinate++
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                yCordinate++
-                counter++;
-            }
-            countDirection = "horizontalLeft";
-            if (winner()) { return };
+            direction=0;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="horizontalLeft";
+            if(winner()){return};
             checkConnectFour();
             break;
 
-        case "horizontalLeft":
-            yCordinate--
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                yCordinate--
-                counter++;
-            }
-            countDirection = "verticalUp";
-            if (winner()) { return };
-            counter = 0;
+            case "horizontalLeft":
+            direction=1;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="verticalUp";
+            if(winner()){return};
+            counter=0;
             checkConnectFour();
             break;
 
-        case "verticalUp":
+            case "verticalUp":
             counter++
-            xCordinate--
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                xCordinate--
-                counter++;
-            }
-            countDirection = "verticalDown";
-            if (winner()) { return };
+            direction=2;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="verticalDown";
+            if(winner()){return};
             checkConnectFour();
             break;
 
-        case "verticalDown":
-            xCordinate++
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                xCordinate++
-                counter++;
-            }
-            countDirection = "diagnolTopRight";
-            if (winner()) { return };
-            counter = 0;
+            case "verticalDown":
+            direction=3;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="diagnolTopRight";
+            if(winner()){return};
+            counter=0;
             checkConnectFour();
             break;
 
-        case "diagnolTopRight":
+            case "diagnolTopRight":
             counter++
-            yCordinate--; xCordinate++;
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                yCordinate--; xCordinate++;
-                counter++;
-            }
-            countDirection = "diagnolbottomLeft";
-            if (winner()) { return };
+            direction=4;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="diagnolbottomLeft";
+            if(winner()){return};
             checkConnectFour();
             break;
 
-        case "diagnolbottomLeft":
-            yCordinate++; xCordinate--;
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                yCordinate++; xCordinate--;
-                counter++;
-            }
-            countDirection = "diagnolTopLeft";
-            if (winner()) { return };
-            counter = 0;
+            case "diagnolbottomLeft":
+            direction=5;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="diagnolTopLeft";
+            if(winner()){return};
+            counter=0;
             checkConnectFour();
-            break;
+            break; 
 
-        case "diagnolTopLeft":
+            case "diagnolTopLeft":
             counter++
-            yCordinate--; xCordinate--;
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                yCordinate--; xCordinate--;
-                counter++;
-            }
-            countDirection = "diagnobottomRight";
-            if (winner()) { return };
+            direction=6;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="diagnobottomRight";
+            if(winner()){return};
             checkConnectFour();
             break;
 
-        case "diagnobottomRight":
-
-            yCordinate++; xCordinate++;
-            while (yCordinate >= 0 && yCordinate <= 6 && xCordinate >= 0 && xCordinate <= 6 && currentTokenLocation[xCordinate][yCordinate] === playerColor[currentPlayer]) {
-                yCordinate++; xCordinate++;
-                counter++;
+            case "diagnobottomRight":
+            direction=7;
+            checkDirection(xCordinate,yCordinate,direction)
+            countDirection="horizontalRight";
+            if(winner()){return};
+            counter=0;
+            break;            
             }
-            countDirection = "horizontalRight";
-            if (winner()) { return };
-            counter = 0;
-            break;
-    }
+        
+    
 
 
+function checkDirection(xCordinate,yCordinate,direction){
+    var countArrayDirection=[[0,1],[0,-1],[-1,0],[1,0],[1,-1],[-1,1],[-1,-1],[1,1]];
+         xCordinate+=countArrayDirection[direction][0];
+         yCordinate+=countArrayDirection[direction][1];
+    while(yCordinate>=0 && yCordinate<=6 && xCordinate>=0 && xCordinate<=6 && currentTokenLocation[xCordinate][yCordinate]===playerColor[currentPlayer]){
+         xCordinate+=countArrayDirection[direction][0];
+         yCordinate+=countArrayDirection[direction][1];
+         counter++;
+        }
 }
-
 
 
 
