@@ -73,22 +73,26 @@ body{
 /* MODAL */
 
 #modal{
-    position: fixed;
-    top: 10%; 
-    width: 50%;
-    height: 50%;
-    border:green 3px solid;
+    position: relative;
+    left: 3%;
+    width: 90%;
+    height: 80%;
+    border: green 3px solid;
+    text-align: center;
+    background-color: rgba(50, 50, 50, 0.8);
+    bottom: 90%;
 }
 
-
-#modalBody {
+p.winnerMsg {
+    color: white;
+    font-size: 2em;
     position: relative;
-    left: 50%;
-    top: 50%;
-    min-width: 50%;
-    min-height: 50%;
-    background-color: white;
-    transform: translate(-50%, -50%);
+}
+
+div.modalBody img {
+    width: 50%;
+    display: inline-block;
+    position: relative;
 }
 
 .reveal{
@@ -97,6 +101,8 @@ body{
 
 .playAgain{
     position: absolute;
+    top: 70%;
+    left: 43%;
     text-align: center;
 }
 
