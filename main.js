@@ -164,7 +164,7 @@ function checkConnectFour(){
 
 // made modal pop up automatically once player wins and inside modal body make a play again button
 function winner(){
-    if(counter >= 0){
+    if(counter === 4){
         // need to make onclick for play again button
         var youWon = $('<img src="youwon1.gif">');
         var playAgain = $('<button class="playAgain">').text('Play Again');
