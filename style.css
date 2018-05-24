@@ -41,7 +41,9 @@ body{
 
 
 
-
+.rowClick{
+    background-size: 100%;
+}
 .rows{
    
     height: 13%;
@@ -64,10 +66,24 @@ body{
 /* Player colors */
 .red{
     background-color: red;
+    height: 30px;
+    width: 30px;
 }
 
 .blue{
  background: blue;
+}
+
+.yellow{
+    background: yellow;
+}
+
+.green{
+    background: green;
+}
+
+.orange{
+    background: orange;
 }
 
 /* MODAL */
@@ -113,3 +129,33 @@ margin-top: 51%;
 margin-left: 47%; 
 margin-bottom: 5%;
 }
+
+/* .hyena{
+    background-image: url("hyena.jpg");
+
+}
+
+.pumbaa{
+    background-image: url("pumbaa.jpg");
+
+}
+
+.rafiki{
+    background-image: url("rafiki.jpg");
+}
+
+.scar{
+    background-image: url("scar.png");
+}
+
+.simba{
+    background-image: url("simba.jpeg");
+}
+
+.hyena,.pumbaa,.rafiki,.scar,.simba{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+} */
+
+
