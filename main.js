@@ -9,16 +9,19 @@ var lastTokenLocationX=null;
 var lastTokenLocationY=null;
 var currentTokenLocation = [
     ['', '', '', '', '', '', ''],
-    ['', '', '', 'red', '', '', ''],
-    ['red', '', '', 'red', '', '', ''],
-    ['', '', 'red', 'red', 'red', '', 'red'],
-    ['red', '', '', 'red', '', '', ''],
-    ['red', '', '', '', '', '', ''],
-    ['red', '', '', '', '', '', '']
+    ['', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '']
 ];
 
 function startGame () {
-    $('.rows > .rowClick').on('click', currentPlayerToken);   //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
+    $('.rows > .rowClick').on('click', currentPlayerToken); 
+    console.log('startgame test ')
+
+    //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
 function tiedGame () {
@@ -37,9 +40,11 @@ function tiedGame () {
 function currentPlayerToken(){
   lastTokenLocationY=parseInt($(this).attr("column"));
   for(var x=currentTokenLocation.length-1;x>=0;x--){
-     if(currentTokenLocation[x][ColumnPosition]===""){
-         currentTokenLocation[x][ColumnPosition]=playerColor[currentPlayer];
+     if(currentTokenLocation[x][lastTokenLocationY]===""){
+         currentTokenLocation[x][lastTokenLocationY]=playerColor[currentPlayer];
          lastTokenLocationX=x;
+         iterateArrayLocation();
+         currentPlayer=-currentPlayer+1;
        checkConnectFour();
       break;
      }
@@ -47,6 +52,7 @@ function currentPlayerToken(){
   }
 
 };
+
 
 function checkConnectFour(){
   var xCordinate=lastTokenLocationX;
@@ -155,6 +161,7 @@ function checkConnectFour(){
 
 
 
+
 // made modal pop up automatically once player wins and inside modal body make a play again button
 function winner(){
     if(counter === 4){
@@ -171,8 +178,20 @@ function winner(){
 
 }
 
+// functions that removes the class that has display:none 
 function showModal(){
     $("#modal").removeClass("reveal");
+}
+
+
+function iterateArrayLocation(){
+    var mergedArray = [].concat.apply([],currentTokenLocation);
+    console.log(mergedArray);
+    for(x = mergedArray.length-1; x>=0; x--){
+        var clickedLocation = '.rowClick:nth('+(x)+")";
+        console.log('this is the ' + clickedLocation)
+        $(clickedLocation).addClass(mergedArray[x]);
+    }
 }
 
 
