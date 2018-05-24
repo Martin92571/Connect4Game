@@ -43,7 +43,8 @@ function createGameBoard(){
             row.append(tokens);            
         }
         $(".gameBoard").append(row);
-
+    }
+}
 
 function tiedGame() {
     if (tokenCounter === 48) {  //if tokenCounter is equal to 48
