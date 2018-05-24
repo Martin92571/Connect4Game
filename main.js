@@ -20,6 +20,7 @@ var currentTokenLocation = [
 
 function startGame() {
     clickHandler();
+    createGameBoard();
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
@@ -141,6 +142,7 @@ function checkConnectFour(){
             counter=0;
             break;            
             }
+        }
         
     
 
