@@ -22,7 +22,7 @@
 .rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
     display: inline-block;
     border: black solid 1px;
-    margin-right: 5px;
+    /* margin-right: 5px; */
     width: 13%;
     height: 100%;
 
