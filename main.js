@@ -28,12 +28,22 @@ function startGame() {
 }
 
 function clickHandler() {
-    $('.rows > .rowClick').on('click', currentPlayerToken);
-    console.log('startgame test ');
     $('.resetBtn').on('click', resetGame);
 
 
 }
+
+function createGameBoard(){
+    for(var x=0;x<currentTokenLocation.length;x++){
+        var row=$("<div>",{class:"rows",row:x});
+        for(var i=0;i<currentTokenLocation[x].length;i++){
+            var tokens=$("<div>",{class:"tokenClicked column"+i,ylocation:i,column:"column"+i});
+            var innerTokenDiv=$("div",{class:"innerToken"});
+            tokens.append(innerTokenDiv);
+            row.append(tokens);            
+        }
+        $(".gameBoard").append(row);
+
 
 function tiedGame() {
     if (tokenCounter === 48) {  //if tokenCounter is equal to 48
@@ -46,12 +56,34 @@ function tiedGame() {
         showModal();    //show modal with tied game message
         $('.playAgain').on('click', resetGame);
         return true;
+
     }
+    var modal=$("<div>",{id:"modal",class:"reveal"});
+    var innerModal=$("<div>",{class:"modalBody"});
+    $(modal).append(innerModal);
+    $(".gameBoard").append(modal);
+    $('.rows>.tokenClicked').on('click', currentPlayerToken);
+    $('.rows>.tokenClicked').on("mouseover",hovercolumn);
+
+
+   
+}
+function hovercolumn(){
+ var hoverLocation="."+$(this).attr("column");
+ 
+ $(hoverLocation).addClass("hover");
+ $('.rows>.tokenClicked').on("mouseleave",function(){
+    
+    $(hoverLocation).removeClass("hover");
+   
+   
+ });
 }
 
 function currentPlayerToken() {
+   
     if(modal){return}
-    lastTokenLocationY = parseInt($(this).attr("column"));
+    lastTokenLocationY = parseInt($(this).attr("ylocation"));
     for (var x = currentTokenLocation.length - 1; x >= 0; x--) {
         if (currentTokenLocation[x][lastTokenLocationY] === "") {
             currentTokenLocation[x][lastTokenLocationY] = playerColor[currentPlayer];
@@ -221,6 +253,19 @@ function modalWinner(){
     $('.modalBody').append(playAgain);
     $('.playAgain').on('click', resetGame);
     showModal();
+} 
+
+function tiedGame() {
+    if (tokenCounter === 49) {  //if tokenCounter is equal to 49
+        var gameOver = $('<img src="tiedgame.gif">');
+        var playAgain = $('<button class="playAgain">').text('Play Again');
+        var tiedMessage = $('<p class="tiedMessageText">').text('You both lose!');
+        $('.modalBody').append(gameOver);
+        $('.modalBody').append(playAgain);
+        $('.modalBody').append(tiedMessage);
+        showModal();    //show modal with tied game message
+        return true;
+    }
 }
 
 // functions that removes the class that has display:none 
@@ -236,10 +281,8 @@ function hideModal() {
 
 function iterateArrayLocation() {
     var mergedArray = [].concat.apply([], currentTokenLocation);
-    console.log(mergedArray);
     for (x = mergedArray.length - 1; x >= 0; x--) {
-        var clickedLocation = '.rowClick:nth(' + (x) + ")";
-        console.log('this is the ' + clickedLocation)
+        var clickedLocation = '.tokenClicked:nth(' + (x) + ")";
         $(clickedLocation).addClass(mergedArray[x]);
     }
 }
@@ -260,8 +303,8 @@ function resetGame() {
         ['', '', '', '', '', '', ''],
         ['', '', '', '', '', '', '']
     ];
-    $('.rowClick').removeClass('red')
-    $('.rowClick').removeClass('blue')
+    $('.tokenClicked').removeClass('red')
+    $('.tokenClicked').removeClass('blue')
     modal = false;
 }
 
