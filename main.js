@@ -20,7 +20,9 @@ var currentTokenLocation = [
 
 function startGame() {
     clickHandler();
+
     playerSelection();
+
     // createGameBoard();
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
@@ -34,7 +36,7 @@ function clickHandler() {
 }
 
 function tiedGame() {
-    if (tokenCounter === 49) {  //if tokenCounter is equal to 49
+    if (tokenCounter === 48) {  //if tokenCounter is equal to 48
         var gameOver = $('<img src="tiedgame.gif">');
         var playAgain = $('<button class="playAgain">').text('Play Again');
         var tiedMessage = $('<p class="tiedMessageText">').text('You both lose!');
@@ -42,6 +44,7 @@ function tiedGame() {
         $('.modalBody').append(playAgain);
         $('.modalBody').append(tiedMessage);
         showModal();    //show modal with tied game message
+        $('.playAgain').on('click', resetGame);
         return true;
     }
 }
@@ -61,7 +64,9 @@ function currentPlayerToken() {
         iterateArrayLocation();
         checkConnectFour();
         currentPlayer = -currentPlayer + 1;
-    
+        debugger;
+        tokenCounter++;
+        console.log('tiedgame test', tokenCounter);
 
 };
 
@@ -111,7 +116,7 @@ function checkConnectFour(){
             direction=0;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="horizontalLeft";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -119,7 +124,7 @@ function checkConnectFour(){
             direction=1;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="verticalUp";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             checkConnectFour();
             break;
@@ -129,7 +134,7 @@ function checkConnectFour(){
             direction=2;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="verticalDown";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -137,7 +142,7 @@ function checkConnectFour(){
             direction=3;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnolTopRight";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             checkConnectFour();
             break;
@@ -147,7 +152,7 @@ function checkConnectFour(){
             direction=4;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnolbottomLeft";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -155,7 +160,7 @@ function checkConnectFour(){
             direction=5;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnolTopLeft";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             checkConnectFour();
             break; 
@@ -165,7 +170,7 @@ function checkConnectFour(){
             direction=6;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="diagnobottomRight";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             checkConnectFour();
             break;
 
@@ -173,7 +178,7 @@ function checkConnectFour(){
             direction=7;
             checkDirection(xCordinate,yCordinate,direction)
             countDirection="horizontalRight";
-            if(winner()){return};
+            if(winner() || tiedGame()){return};
             counter=0;
             break;            
             }
@@ -191,6 +196,7 @@ function checkDirection(xCordinate,yCordinate,direction){
          yCordinate+=countArrayDirection[direction][1];
          counter++;
         }
+
 }
 
 
