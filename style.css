@@ -8,6 +8,7 @@ body{
     height: 90vh;
     width: 100vw;
     position: relative;
+
    
 }
 
@@ -25,15 +26,16 @@ body{
     border: 1px solid black;
     padding: 1%;
     display: inline-block;
+    background-color: black;
     
 
 }
 
 #playerOne, #playerTwo{
     font-family: 'Press Start 2P', cursive;
-    height: 50%;
+    height: 100%;
     width: 20%;
-    border: indigo 2px solid;
+    border: green 2px solid;
     display: inline-block;
     
     text-align: center;
@@ -58,6 +60,10 @@ body{
     width: 10%;
     height: 100%;
 
+}
+
+.rowClick{
+    background-color: white;
 }
 
 
