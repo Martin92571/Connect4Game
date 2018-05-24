@@ -21,14 +21,19 @@ body{
 
 .gameBoard{
     margin: 0 auto;
-    width: 55%;
-    height: 85%;
+    padding-top:10px;
+    width: 57%;
+    height: 90%;
+    
     border: 1px solid black;
-    padding: 1%;
+    
     display: inline-block;
     background-color: black;
     
 
+}
+.hover{
+     box-shadow: 0px 0px 10px green;
 }
 
 #playerOne, #playerTwo{
@@ -43,25 +48,25 @@ body{
 
 
 
-.rowClick{
-    background-size: 100%;
-}
+
 .rows{
-   
-    height: 13%;
+    
     width: 100%;
-    margin-top: 0.8%;
-    padding-left: 20px;
-}
-
-.rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
+    height: 14%;
     display: inline-block;
-    border: black solid 1px;
-    margin-right: 3.6%;
-    border-radius: 100%;
+   
+    
+    
+}
+.tokenClicked{
+    
+    margin-top:0.5%;
     width: 10%;
-    height: 100%;
-
+    border: 1px solid black;
+    height: 85%;
+    margin-left:3.5%;
+    border-radius: 100%;
+    display: inline-block;
 }
 
 .rowClick{
