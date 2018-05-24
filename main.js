@@ -87,7 +87,7 @@ function playerSelection() {
         $('.modalBody').append(playerColorGreen);
         $('.modalBody').append(playerColorOrange);
         showModal();
-    } else if (currentPlayer === 1) {
+    } else if (currentPlayer === 1)  {
         var playerTwo = $('<h1 class="playerTwoTitle">').text('Player 2');
         var chooseImage = $('<p class="chooseImagePTwo">').text('Choose color:');
         var playerColorRed = $('<div class="red">');
