@@ -101,6 +101,12 @@ body{
     border-radius: 50%;
     height: 5rem;
     width: 5rem;
+    display: inline-block;
+    margin: 0 5%;
+}
+
+.chosen {
+    opacity: 0.5;
 }
 
 /* MODAL */
@@ -146,33 +152,4 @@ margin-top: 51%;
 margin-left: 47%; 
 margin-bottom: 5%;
 }
-
-/* .hyena{
-    background-image: url("hyena.jpg");
-
-}
-
-.pumbaa{
-    background-image: url("pumbaa.jpg");
-
-}
-
-.rafiki{
-    background-image: url("rafiki.jpg");
-}
-
-.scar{
-    background-image: url("scar.png");
-}
-
-.simba{
-    background-image: url("simba.jpeg");
-}
-
-.hyena,.pumbaa,.rafiki,.scar,.simba{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-} */
-
 

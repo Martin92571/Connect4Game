@@ -3,7 +3,7 @@ $(document).ready(startGame);
 var counter = 0;
 var tokenCounter = null;
 var currentPlayer = 0;
-var playerColor = ['red', 'blue'];
+var playerColor = [];
 var countDirection = "horizontalRight";
 var lastTokenLocationX = null;
 var lastTokenLocationY = null;
@@ -19,17 +19,41 @@ var currentTokenLocation = [
 ];
 
 function startGame() {
+    createGameBoard();
+    playerSelection();
     clickHandler();
 
-    playerSelection();
 
-    createGameBoard()
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
 
 function clickHandler() {
     $('.resetBtn').on('click', resetGame);
+    // $('.startColor').click(function(){
+    //     console.log(this)
+    // }) 
+    $('.startColor').on('click', selectColor);
 
+}
+
+function selectColor() {
+    var playerChoice = this.classList[1];
+    playerColor.push(playerChoice);
+    $(this).addClass('chosen');
+    $(this).off();
+
+    if (playerColor.length === 1) {
+        $('.playerOneTitle').text('Player 2');
+    }
+    if(playerColor.length === 2) {
+        $('.startColor').off();
+        setTimeout(function() {
+            $('.modalBody').empty();
+            var button = $('<button>').text('Start Game').on('click', hideModal);
+            $('.modalBody').append(button);
+        }, 1000)
+    }
+    console.log(this);
 
 }
 
@@ -104,11 +128,11 @@ function playerSelection() {
     if (currentPlayer === 0) {
         var playerOne = $('<h1 class="playerOneTitle">').text('Player 1');
         var chooseImage = $('<p class="chooseImagePOne">').text('Choose color:');
-        var playerColorRed = $('<div class="red">');
-        var playerColorBlue =$('<div class="blue">');
-        var playerColorYellow =$('<div class="yellow">');
-        var playerColorGreen =$('<div class="green">');
-        var playerColorOrange =$('<div class="orange">');
+        var playerColorRed = $('<div class="startColor red">');
+        var playerColorBlue =$('<div class="startColor blue">');
+        var playerColorYellow =$('<div class="startColor yellow">');
+        var playerColorGreen =$('<div class="startColor green">');
+        var playerColorOrange =$('<div class="startColor orange">');
         $('.modalBody').append(playerOne);
         $('.modalBody').append(chooseImage);
         $('.modalBody').append(playerColorRed);
@@ -117,23 +141,25 @@ function playerSelection() {
         $('.modalBody').append(playerColorGreen);
         $('.modalBody').append(playerColorOrange);
         showModal();
-    } else if (currentPlayer === 1)  {
-        var playerTwo = $('<h1 class="playerTwoTitle">').text('Player 2');
-        var chooseImage = $('<p class="chooseImagePTwo">').text('Choose color:');
-        var playerColorRed = $('<div class="red">');
-        var playerColorBlue =$('<div class="blue">');
-        var playerColorYellow =$('<div class="yellow">');
-        var playerColorGreen =$('<div class="green">');
-        var playerColorOrange =$('<div class="orange">');
-        $('.modalBody').append(playerTwo);
-        $('.modalBody').append(chooseImage);
-        $('.modalBody').append(playerColorRed);
-        $('.modalBody').append(playerColorBlue);
-        $('.modalBody').append(playerColorYellow);
-        $('.modalBody').append(playerColorGreen);
-        $('.modalBody').append(playerColorOrange);
-        showModal();
-    }
+    } 
+    
+    // else if (currentPlayer === 1)  {
+    //     var playerTwo = $('<h1 class="playerTwoTitle">').text('Player 2');
+    //     var chooseImage = $('<p class="chooseImagePTwo">').text('Choose color:');
+    //     var playerColorRed = $('<div class="red">');
+    //     var playerColorBlue =$('<div class="blue">');
+    //     var playerColorYellow =$('<div class="yellow">');
+    //     var playerColorGreen =$('<div class="green">');
+    //     var playerColorOrange =$('<div class="orange">');
+    //     $('.modalBody').append(playerTwo);
+    //     $('.modalBody').append(chooseImage);
+    //     $('.modalBody').append(playerColorRed);
+    //     $('.modalBody').append(playerColorBlue);
+    //     $('.modalBody').append(playerColorYellow);
+    //     $('.modalBody').append(playerColorGreen);
+    //     $('.modalBody').append(playerColorOrange);
+    //     showModal();
+    // }
 }
 
 function checkConnectFour(){
