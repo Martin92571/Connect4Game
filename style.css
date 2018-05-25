@@ -110,6 +110,19 @@ body{
     border-radius: 50%;
     height: 5rem;
     width: 5rem;
+    display: inline-block;
+   
+}
+
+.chosen {
+    opacity: 0.5;
+}
+.btnCenter{
+    position: absolute;
+    top: 40%;
+}
+.winerMsg{
+    font-size: 20px;
 }
 
 /* MODAL */
@@ -124,7 +137,13 @@ body{
     background-color: rgba(50, 50, 50, 0.8);
     bottom: 90%;
 }
-
+.modalBody{
+    color:white;
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
 p.winnerMsg {
     color: white;
     font-size: 2em;
@@ -155,33 +174,4 @@ div.modalBody img {
     text-align: center;
   
 }
-
-/* .hyena{
-    background-image: url("hyena.jpg");
-
-}
-
-.pumbaa{
-    background-image: url("pumbaa.jpg");
-
-}
-
-.rafiki{
-    background-image: url("rafiki.jpg");
-}
-
-.scar{
-    background-image: url("scar.png");
-}
-
-.simba{
-    background-image: url("simba.jpeg");
-}
-
-.hyena,.pumbaa,.rafiki,.scar,.simba{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-} */
-
 
