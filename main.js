@@ -7,6 +7,7 @@ var currentPlayer = 0;
 var player=[{playerEffect:false,playerScore:null,playerscorespan:".playerCount1"},{playerEffect:false,playerScore:null,playerscorespan:".playerCount2"}]
 
 var playerColor = [];
+var columnEffectUsed = [];
 
 var countDirection = "horizontalRight";
 var lastTokenLocationX = null;
@@ -112,18 +113,32 @@ function hovercolumn(){
 }
 function specialTrue(){
     for(var x=0;x<currentTokenLocation.length;x++){
-        if(currentTokenLocation[lastTokenLocationX][lastTokenLocationY]===currentTokenLocation[0][x]){
-            player[currentPlayer].playerEffect=true;
-            alert("hit");
+        if (columnEffectUsed.indexOf(lastTokenLocationY) === -1) {
+            if(currentTokenLocation[lastTokenLocationX][lastTokenLocationY]===currentTokenLocation[0][x]){
+                columnEffectUsed.push(lastTokenLocationY);
+                player[currentPlayer].playerEffect=true;
+            }
         }
+        
     }
   
 }
 
 function currentPlayerToken() {
-    
     if(modal){return}
     lastTokenLocationY = parseInt($(this).attr("ylocation"));
+    if(player[currentPlayer].playerEffect) {
+        player[currentPlayer].playerEffect=false;
+
+        for (var row = 6; row >= 0; row--) {
+            currentTokenLocation[row][lastTokenLocationY] = "";
+        }
+        var columnPositions = $('[ylocation='+lastTokenLocationY+']');
+        for (var color = 0; color < playerColor.length; color++) {
+            columnPositions.removeClass(playerColor[color]);
+        }
+        // return;
+    }
     for (var x = currentTokenLocation.length - 1; x >= 0; x--) {
         if (currentTokenLocation[x][lastTokenLocationY] === "") {
             currentTokenLocation[x][lastTokenLocationY] = playerColor[currentPlayer];
@@ -139,7 +154,9 @@ function currentPlayerToken() {
     currentTokenLocationX=lastTokenLocationX;
     currentTokenLocationY=lastTokenLocationY;
     
-        specialTrue()
+    if (!player[currentPlayer].playerEffect && !player[-currentPlayer + 1].playerEffect) {
+        specialTrue();
+    }
         iterateArrayLocation();
         checkConnectFour();
         tokenCounter++;
