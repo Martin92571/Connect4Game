@@ -1,82 +1,159 @@
 
-
+body{
+    overflow: hidden;
+    
+}
 #gameArea{
     margin: 0 auto;
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
     position: relative;
+
+   
+}
+
+.cenerContent{
+    display: flex;
+    width: 95%;
+    height: 90%;
+    margin:0 auto;
+}
+.gameTitle{
+    font-size: 3rem;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    margin:1%;
 }
 
 .gameBoard{
-    margin: auto;
-    width: 50%;
+    margin: 0 auto;
+    padding-top:10px;
+    width: 57%;
     height: 95%;
-    margin-left: 23%;
+    
     border: 1px solid black;
-    padding: 1%;
+    
     display: inline-block;
-    position: absolute;
+    background-color: black;
+    
 
+}
+.hover{
+     box-shadow: 0px 0px 2px 7px green;
 }
 
 #playerOne, #playerTwo{
-    height: 50%;
+    font-family: 'Press Start 2P', cursive;
+    height: 70%;
     width: 20%;
-    border: indigo 2px solid;
+    border: green 2px solid;
     display: inline-block;
-    position: absolute;
+    
     text-align: center;
 }
 
-#playerTwo{
-    margin-left: 79%;
-}
 
+.tiedMessageText{
+    color:white;
+    font-size:20px;
+}
 
 .rows{
-    display: inline-block;
-    height: 13%;
+    
     width: 100%;
+    height: 14%;
+    display: inline-block;
+   
+    
+    
+}
+.tokenClicked{
+    
+    margin-top:0.5%;
+    width: 10%;
+    border: 1px solid black;
+    height: 85%;
+    margin-left:3.5%;
+    border-radius: 100%;
+    display: inline-block;
+    background-color: white;
 }
 
-.rowZero,.rowOne,.rowTwo,.rowThree,.rowFour,.rowFive,.rowSix{
-    display: inline-block;
-    border: black solid 1px;
-    border-radius: 80%;
-    width: 13%;
-    height: 100%;
-
+.rowClick{
+    background-color: white;
 }
 
 
 /* Player colors */
 .red{
     background-color: red;
+   
 }
 
 .blue{
- background: blue;
+ background-color: blue;
+}
+
+.yellow{
+    background: yellow;
+}
+
+.green{
+    background: green;
+}
+
+.orange{
+    background: orange;
+}
+
+.startColor{
+    border-radius: 50%;
+    height: 5rem;
+    width: 5rem;
+    display: inline-block;
+   
+}
+
+.chosen {
+    opacity: 0.5;
+}
+.btnCenter{
+    position: absolute;
+    top: 40%;
+}
+.winerMsg{
+    font-size: 20px;
 }
 
 /* MODAL */
 
 #modal{
-    position: fixed;
-    top: 10%; 
-    width: 50%;
-    height: 50%;
-    border:green 3px solid;
+    position: relative;
+    left: 3%;
+    width: 90%;
+    height: 80%;
+    border: green 3px solid;
+    text-align: center;
+    background-color: rgba(50, 50, 50, 0.8);
+    bottom: 90%;
+}
+.modalBody{
+    color:white;
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+p.winnerMsg {
+    color: white;
+    font-size: 2em;
+    position: relative;
 }
 
-
-#modalBody {
+div.modalBody img {
+    width: 50%;
+    display: inline-block;
     position: relative;
-    left: 50%;
-    top: 50%;
-    min-width: 50%;
-    min-height: 50%;
-    background-color: white;
-    transform: translate(-50%, -50%);
 }
 
 .reveal{
@@ -85,13 +162,16 @@
 
 .playAgain{
     position: absolute;
+    top: 70%;
+    left: 43%;
     text-align: center;
 }
 
 /* Reset Button */
 
-.resetBtn{
-margin-top: 51%;
-margin-left: 47%; 
-margin-bottom: 5%;
+.resetBtnDiv{
+    width:100%;
+    text-align: center;
+  
 }
+
