@@ -110,15 +110,6 @@ function hovercolumn(){
    
  });
 }
-function specialTrue(){
-    for(var x=0;x<currentTokenLocation.length;x++){
-        if(currentTokenLocation[lastTokenLocationX][lastTokenLocationY]===currentTokenLocation[0][x]){
-            player[currentPlayer].playerEffect=true;
-            alert("hit");
-        }
-    }
-  
-}
 
 function currentPlayerToken() {
     
@@ -139,7 +130,7 @@ function currentPlayerToken() {
     currentTokenLocationX=lastTokenLocationX;
     currentTokenLocationY=lastTokenLocationY;
     
-        specialTrue()
+       
         iterateArrayLocation();
         checkConnectFour();
         tokenCounter++;
