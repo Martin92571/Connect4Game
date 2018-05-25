@@ -83,8 +83,9 @@ function createGameBoard(){
 }
 
 function tiedGame() {
+
        $("modalBody").empty();
-    if (tokenCounter >= 48) {  //if tokenCounter is equal to 48
+    if (tokenCounter === 48) {  //if tokenCounter is equal to 48
         var gameOver = $('<img src="tiedgame.gif">');
         var playAgain = $('<button>', {class:"tiedAgain"}).text('Play Again');
         var tiedMessage = $('<p>',{class:"tiedMessage"}).text('You both lose!');
@@ -293,18 +294,7 @@ function modalWinner(){
     showModal();
 } 
 
-function tiedGame() {
-    if (tokenCounter === 49) {  //if tokenCounter is equal to 49
-        var gameOver = $('<img src="tiedgame.gif">');
-        var playAgain = $('<button class="playAgain">').text('Play Again');
-        var tiedMessage = $('<p class="tiedMessageText">').text('You both lose!');
-        $('.modalBody').append(gameOver);
-        $('.modalBody').append(playAgain);
-        $('.modalBody').append(tiedMessage);
-        showModal();    //show modal with tied game message
-        return true;
-    }
-}
+
 
 
 function showModal() {
@@ -314,6 +304,7 @@ function showModal() {
 }
 
 function hideModal() {
+    $('.modalBody').empty();
     $('#modal').addClass("reveal")
 }
 
