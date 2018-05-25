@@ -3,10 +3,16 @@ $(document).ready(startGame);
 var counter = 0;
 var tokenCounter = null;
 var currentPlayer = 0;
+
+var player=[{playerEffect:false,playerScore:null,playerscorespan:".playerCount1"},{playerEffect:false,playerScore:null,playerscorespan:".playerCount2"}]
+
 var playerColor = [];
+
 var countDirection = "horizontalRight";
 var lastTokenLocationX = null;
 var lastTokenLocationY = null;
+var currentTokenLocationY=null;
+var currentTokenLocationX=null;
 var modal = false;
 var currentTokenLocation = [
     ['', '', '', '', '', '', ''],
@@ -22,7 +28,6 @@ function startGame() {
     createGameBoard();
     playerSelection();
     clickHandler();
-
 
     //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
 }
@@ -49,7 +54,7 @@ function selectColor() {
         $('.startColor').off();
         setTimeout(function() {
             $('.modalBody').empty();
-            var button = $('<button>').text('Start Game').on('click', hideModal);
+            var button = $('<button>',{class:"btnCenter btn btn-lg btn-primary"}).text('Start Game').on('click', hideModal);
             $('.modalBody').append(button);
         }, 1000)
     }
@@ -78,16 +83,17 @@ function createGameBoard(){
 }
 
 function tiedGame() {
-    debugger;
+
+       $("modalBody").empty();
     if (tokenCounter === 48) {  //if tokenCounter is equal to 48
         var gameOver = $('<img src="tiedgame.gif">');
-        var playAgain = $('<button class="playAgain">').text('Play Again');
-        var tiedMessage = $('<p class="tiedMessageText">').text('You both lose!');
+        var playAgain = $('<button>', {class:"tiedAgain"}).text('Play Again');
+        var tiedMessage = $('<p>',{class:"tiedMessage"}).text('You both lose!');
         $('.modalBody').append(gameOver);
         $('.modalBody').append(playAgain);
         $('.modalBody').append(tiedMessage);
         showModal();    //show modal with tied game message
-        $('.playAgain').on('click', resetGame);
+        $('.tiedAgain').on('click', resetGame);
         return true;
 
     }
@@ -104,9 +110,18 @@ function hovercolumn(){
    
  });
 }
+function specialTrue(){
+    for(var x=0;x<currentTokenLocation.length;x++){
+        if(currentTokenLocation[lastTokenLocationX][lastTokenLocationY]===currentTokenLocation[0][x]){
+            player[currentPlayer].playerEffect=true;
+            alert("hit");
+        }
+    }
+  
+}
 
 function currentPlayerToken() {
-   
+    
     if(modal){return}
     lastTokenLocationY = parseInt($(this).attr("ylocation"));
     for (var x = currentTokenLocation.length - 1; x >= 0; x--) {
@@ -117,11 +132,18 @@ function currentPlayerToken() {
         }
 
     }
+
+    if(lastTokenLocationX===currentTokenLocationX &&lastTokenLocationY===currentTokenLocationY){
+        return;
+    }
+    currentTokenLocationX=lastTokenLocationX;
+    currentTokenLocationY=lastTokenLocationY;
     
+        specialTrue()
         iterateArrayLocation();
         checkConnectFour();
-        currentPlayer = -currentPlayer + 1;
         tokenCounter++;
+        currentPlayer = -currentPlayer + 1;
 
 };
 
@@ -129,6 +151,7 @@ function playerSelection() {
     if (currentPlayer === 0) {
         var playerOne = $('<h1 class="playerOneTitle">').text('Player 1');
         var chooseImage = $('<p class="chooseImagePOne">').text('Choose color:');
+        var colorRow=$('<div>',{class:"colorRow"})
         var playerColorRed = $('<div class="startColor red">');
         var playerColorBlue =$('<div class="startColor blue">');
         var playerColorYellow =$('<div class="startColor yellow">');
@@ -136,32 +159,19 @@ function playerSelection() {
         var playerColorOrange =$('<div class="startColor orange">');
         $('.modalBody').append(playerOne);
         $('.modalBody').append(chooseImage);
-        $('.modalBody').append(playerColorRed);
-        $('.modalBody').append(playerColorBlue);
-        $('.modalBody').append(playerColorYellow);
-        $('.modalBody').append(playerColorGreen);
-        $('.modalBody').append(playerColorOrange);
+        $(colorRow).append(playerColorRed);
+        $(colorRow).append(playerColorBlue);
+        $(colorRow).append(playerColorYellow);
+        $(colorRow).append(playerColorGreen);
+        $(colorRow).append(playerColorOrange);
+        $(".modalBody").append(colorRow);
         showModal();
+
+
     } 
-    
-    // else if (currentPlayer === 1)  {
-    //     var playerTwo = $('<h1 class="playerTwoTitle">').text('Player 2');
-    //     var chooseImage = $('<p class="chooseImagePTwo">').text('Choose color:');
-    //     var playerColorRed = $('<div class="red">');
-    //     var playerColorBlue =$('<div class="blue">');
-    //     var playerColorYellow =$('<div class="yellow">');
-    //     var playerColorGreen =$('<div class="green">');
-    //     var playerColorOrange =$('<div class="orange">');
-    //     $('.modalBody').append(playerTwo);
-    //     $('.modalBody').append(chooseImage);
-    //     $('.modalBody').append(playerColorRed);
-    //     $('.modalBody').append(playerColorBlue);
-    //     $('.modalBody').append(playerColorYellow);
-    //     $('.modalBody').append(playerColorGreen);
-    //     $('.modalBody').append(playerColorOrange);
-    //     showModal();
-    // }
 }
+  
+
 
 function checkConnectFour(){
         var xCordinate=lastTokenLocationX;
@@ -269,23 +279,27 @@ function winner() {
 }
 
 function modalWinner(){
+    currentPlayer = -currentPlayer + 1
     $(".modalBody").empty();
     var youWon = $('<img src="youwon1.gif">');
     var playAgain = $('<button class="playAgain">').text('Play Again');
-    var winnerMsg = $('<p class="winerMsg">').text('Player: ' + currentPlayer);
+    var winnerMsg = $('<p class="winerMsg">').text('Player: ' + (currentPlayer+1));
     $('.modalBody').append(winnerMsg);
     $('.modalBody').append(youWon);
     $('.modalBody').append(playAgain);
     $('.playAgain').on('click', resetGame);
+    player[currentPlayer].playerScore++
+    $(player[currentPlayer].playerscorespan).text(player[currentPlayer].playerScore);
+
     showModal();
 } 
 
 
 
-// functions that removes the class that has display:none 
+
 function showModal() {
     $("#modal").removeClass("reveal");
-    $('.playAgain').on('click', hideModal);
+    
 
 }
 
@@ -318,8 +332,9 @@ function resetGame() {
         ['', '', '', '', '', '', ''],
         ['', '', '', '', '', '', '']
     ];
-    $('.tokenClicked').removeClass('red')
-    $('.tokenClicked').removeClass('blue')
+    $('.tokenClicked').removeClass(playerColor[0])
+    $('.tokenClicked').removeClass(playerColor[1])
+    hideModal();
     modal = false;
 }
 

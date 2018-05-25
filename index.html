@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Connect 4 Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -16,11 +17,13 @@
 
     <div id="gameArea">
 
-        <h1 class="gameTitle">Connect Four</h1>                
-        <div id="playerOne"><h2>Player 1 Score:</h2></div>
+        <h1 class="gameTitle">Connect Four</h1>
+        <div class="cenerContent">            
+        <div id="playerOne"><h2>Player 1 Score:<span class="playerCount1">0</span></h2></div>
         <div class="gameBoard"></div>
-        <div id="playerTwo"><h2>Player 2 Score:</h2></div>
-        <button class="resetBtn">Reset</button>
+        <div id="playerTwo"><h2>Player 2 Score:<span class="playerCount2">0</span></h2></div>
+        </div>    
+         <div class="resetBtnDiv"><button class="btn btn-secondary btn-lg resetBtn">Reset</button></div>
     </div>
     
 </body>
