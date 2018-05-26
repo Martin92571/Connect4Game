@@ -1,20 +1,17 @@
-$(document).ready(startGame);
+$(document).ready(startGame);   //Oh. hai Mark.
 
-var counter = 0;
-var tokenCounter = null;
-var currentPlayer = 0;
-
+var counter = 0;    //variable used in functions: checkConnectFour, checkDirection, winner, resetGame
+var tokenCounter = null;    //variable used in functions: tiedGame, currentPlayerToken, resetGame
+var currentPlayer = 0;  //variable used in functions: currentPlayerToken, playerSelection, checkDirection, modalWinner, resetGame
 var player=[{playerEffect:false,playerScore:null,playerscorespan:".playerCount1"},{playerEffect:false,playerScore:null,playerscorespan:".playerCount2"}]
-
-var playerColor = [];
-
-var countDirection = "horizontalRight";
-var lastTokenLocationX = null;
-var lastTokenLocationY = null;
-var currentTokenLocationY=null;
-var currentTokenLocationX=null;
-var modal = false;
-var currentTokenLocation = [
+var playerColor = [];   //variable used in functions: selectColor, currentPlayerToken, checkDirection, resetGame
+var countDirection = "horizontalRight"; //variable used in function: checkConnectFour
+var lastTokenLocationX = null;  //variable used in functions: currentPlayerToken, checkConnectFour, resetGame
+var lastTokenLocationY = null;  //variable used in functions: currentPlayerToken, checkConnectFour, resetGame
+var currentTokenLocationY=null; //variable used in function: currentPlayerToken
+var currentTokenLocationX=null; //variable used in function: currentPlayerToken
+var modal = false;  //variable used in functions: currentPlayerToken, winner, resetGame
+var currentTokenLocation = [    //variable used in functions: createGameBoard, currentPlayerToken, checkDirection, iterateArrayLocation, resetGame
     ['', '', '', '', '', '', ''],
     ['', '', '', '', '', '', ''],
     ['', '', '', '', '', '', ''],
@@ -24,71 +21,69 @@ var currentTokenLocation = [
     ['', '', '', '', '', '', '']
 ];
 
-function startGame() {
-    createGameBoard();
-    playerSelection();
-    clickHandler();
-
-    //select class 'rows', on click event, attach event handler to class "rowClick, run currentPlayerToken function
+function startGame() {  //function that contains functions that are ready when window is finished loading
+    createGameBoard();  //call createGameBoard function first
+    playerSelection();  //call playerSelection function
+    clickHandler();     //call clickHandler function
 }
 
 function clickHandler() {
-    $('.resetBtn').on('click', resetGame);
+    $('.resetBtn').on('click', resetGame);  //add click handler to .resetBtn that runs resetGame function
     // $('.startColor').click(function(){
     //     console.log(this)
     // }) 
-    $('.startColor').on('click', selectColor);
-
+    $('.startColor').on('click', selectColor);  //add click handler to .startColor that runs selectColor function
 }
 
 function selectColor() {
-    var playerChoice = this.classList[1];
-    playerColor.push(playerChoice);
-    $(this).addClass('chosen');
-    $(this).off();
+    var playerChoice = this.classList[1];   //store selected color(this) in classList and store classList in playerChoice
+    playerColor.push(playerChoice);     //push playerChoice into playerColor
+    $(this).addClass('chosen');     //adds class "chosen" to this(.startColor that was clicked)
+    $(this).off();      //remove event handlers using .off() method from this(.startColor that was clicked)
 
-    if (playerColor.length === 1) {
-        $('.playerOneTitle').text('Player 2');
+    if (playerColor.length === 1) {     //checks if playerColor array length is equal to 1
+        $('.playerOneTitle').text('Player 2');  //if check is true, select the .playerOneTitle and add text "Player 2"
     }
-    if(playerColor.length === 2) {
-        $('.startColor').off();
-        setTimeout(function() {
-            $('.modalBody').empty();
-            var button = $('<button>',{class:"btnCenter btn btn-lg btn-primary"}).text('Start Game').on('click', hideModal);
-            $('.modalBody').append(button);
+
+    if(playerColor.length === 2) {      //checks if playerColor array length is equal to 2
+        $('.startColor').off();     //if check is true, removes event handlers from .startColor(all color choices)
+
+        setTimeout(function() {     //Timed function that executes after 1 second
+            $('.modalBody').empty();    //removes all content in .modalBody using .empty() method
+            var button = $('<button>',{class:"btnCenter btn btn-lg btn-primary"}).text('Start Game').on('click', hideModal);    //creates button using jQuery, used bootstrap to create a large button and sets color "btn-primary" adds text "Start Game" to button using .text method, adds click event that hides modal
+            $('.modalBody').append(button); //appends button to .modalBody
         }, 1000)
     }
-    console.log(this);
+    console.log(this);  //What is this?
 
 }
 
 function createGameBoard(){
-    for(var x=0;x<currentTokenLocation.length;x++){
-        var row=$("<div>",{class:"rows",row:x});
-        for(var i=0;i<currentTokenLocation[x].length;i++){
-            var tokens=$("<div>",{class:"tokenClicked column"+i,ylocation:i,column:"column"+i});
-            var innerTokenDiv=$("div",{class:"innerToken"});
-            tokens.append(innerTokenDiv);
-            row.append(tokens);            
+    for(var x=0;x<currentTokenLocation.length;x++){     //for loop that iterates through currentTokenLocation array length
+        var row=$("<div>",{class:"rows",row:x});    //creates rows using current value of x in for loop
+        for(var i=0;i<currentTokenLocation[x].length;i++){  //for loop that iterates through div.tokens to add to div.row
+            var tokens=$("<div>",{class:"tokenClicked column"+i,ylocation:i,column:"column"+i});    //creates tokens for each row
+            var innerTokenDiv=$("div",{class:"innerToken"});    //div for player token that goes into .tokenClicked
+            tokens.append(innerTokenDiv);   //appends (innerTokenDiv)"player tokens" to (tokens)"game board token slots"
+            row.append(tokens);     //appends (tokens)"game board token slots" to (row)"current row iteration"
         }
-        $(".gameBoard").append(row);
+        $(".gameBoard").append(row);    //appends (row) to the game board
 
     }
-    var modal=$("<div>",{id:"modal",class:"reveal"});
-    var innerModal=$("<div>",{class:"modalBody"});
-    $(modal).append(innerModal);
-    $(".gameBoard").append(modal);
-    $('.rows>.tokenClicked').on('click', currentPlayerToken);
-    $('.rows>.tokenClicked').on("mouseover",hovercolumn)
+    var modal=$("<div>",{id:"modal",class:"reveal"});   //create modal that can be hidden using class "reveal"
+    var innerModal=$("<div>",{class:"modalBody"});  //create modal body that can be cleared and reused for game start, game win, and game tied
+    $(modal).append(innerModal);        //append the modalBody to the modal container
+    $(".gameBoard").append(modal);      //append the modal to the div with class of "gameBoard"
+    $('.rows>.tokenClicked').on('click', currentPlayerToken);   //add click handler to .tokenClicked that runs currentPlayerToken function
+    $('.rows>.tokenClicked').on("mouseover",hovercolumn)    //adds click handler to .tokenClicked that runs hovercolumn Function
 }
 
 function tiedGame() {
-
-       $("modalBody").empty();
-    if (tokenCounter === 48) {  //if tokenCounter is equal to 48
-        var gameOver = $('<img src="tiedgame.gif">');
-        var playAgain = $('<button>', {class:"tiedAgain"}).text('Play Again');
-        var tiedMessage = $('<p>',{class:"tiedMessage"}).text('You both lose!');
+    $("modalBody").empty();     //empty the contents of modalBody
+    if (tokenCounter === 48) {  //if tokenCounter is equal to 48(game board full)
+        var gameOver = $('<img src="tiedgame.gif">');   //create image tag for game over
+        var playAgain = $('<button>', {class:"tiedAgain"}).text('Play Again');  //create button with class of "tiedAgain" and text of "Play Again"
+        var tiedMessage = $('<p>',{class:"tiedMessage"}).text('You both lose!');    //
         $('.modalBody').append(gameOver);
         $('.modalBody').append(playAgain);
         $('.modalBody').append(tiedMessage);
@@ -97,17 +92,17 @@ function tiedGame() {
         return true;
 
     }
-   
+
 }
-function hovercolumn(){
+function hovercolumn(){     //rename hoverColumn? *********************************************
  var hoverLocation="."+$(this).attr("column");
- 
+
  $(hoverLocation).addClass("hover");
  $('.rows>.tokenClicked').on("mouseleave",function(){
-    
+
     $(hoverLocation).removeClass("hover");
-   
-   
+
+
  });
 }
 
