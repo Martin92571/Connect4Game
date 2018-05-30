@@ -56,6 +56,11 @@ function selectColor() {
             $('.modalBody').empty();
             var button = $('<button>',{class:"btnCenter btn btn-lg btn-primary"}).text('Start Game').on('click', hideModal);
             $('.modalBody').append(button);
+            /**
+             * Hackathon Review
+             * May want to turn this into a separate function as well
+             */
+
         }, 1000)
     }
     console.log(this);
@@ -80,6 +85,23 @@ function createGameBoard(){
     $(".gameBoard").append(modal);
     $('.rows>.tokenClicked').on('click', currentPlayerToken);
     $('.rows>.tokenClicked').on("mouseover",hovercolumn)
+    /**
+     * Hackathon Review
+     * May want to condense these down since you already have the selector
+     * For example:
+     */
+    // $('.rows>.tokenClicked')
+    //     .on('click', currentPlayerToken)
+    //     .on("mouseover",hovercolumn)
+    //     .on("mouseleave",hoverColumnRemove);
+}
+/**
+ * Hackathon Review
+ * Then instead potentially create function for what's happening opposed to an anonymous function
+ */
+function hoverColumnRemove() {
+    var hoverLocation="."+$(this).attr("column");
+    $(hoverLocation).removeClass("hover");
 }
 
 function tiedGame() {
@@ -92,6 +114,11 @@ function tiedGame() {
         $('.modalBody').append(gameOver);
         $('.modalBody').append(playAgain);
         $('.modalBody').append(tiedMessage);
+        /**
+         * Hackathon Review
+         * Append can accept multiple arguments
+         * $('.modalBody').append(gameOver, playAgain, tiedMessage);
+         */
         showModal();    //show modal with tied game message
         $('.tiedAgain').on('click', resetGame);
         return true;
@@ -103,12 +130,7 @@ function hovercolumn(){
  var hoverLocation="."+$(this).attr("column");
  
  $(hoverLocation).addClass("hover");
- $('.rows>.tokenClicked').on("mouseleave",function(){
-    
-    $(hoverLocation).removeClass("hover");
-   
-   
- });
+
 }
 
 function currentPlayerToken() {
@@ -140,6 +162,11 @@ function currentPlayerToken() {
 
 function playerSelection() {
     if (currentPlayer === 0) {
+        /**
+         * Hackathon Review
+         * Instead of doing a comparison for a "0" our condition can include:
+         * if (!curren)
+         */
         var playerOne = $('<h1 class="playerOneTitle">').text('Player 1');
         var chooseImage = $('<p class="chooseImagePOne">').text('Choose color:');
         var colorRow=$('<div>',{class:"colorRow"})
@@ -157,6 +184,20 @@ function playerSelection() {
         $(colorRow).append(playerColorOrange);
         $(".modalBody").append(colorRow);
         showModal();
+        /**
+         * Hackathon Review
+         * This function has repetitive tasks that you can condense down into a for loop
+         * Potentially can be changed to make use of an array of colors
+         */
+        var playerChoiceIndicator = $('<h1>').addClass('playerOneTitle').text('Player 1');
+        var chooseImage = $('<p>').addClass('chooseImagePOne').text('Choose color:');
+        var colorRow=$('<div>',{class:"colorRow"});
+        var colors = ['red', 'blue', 'yellow', 'green', 'orange'];
+        for (var currentColor of colors) {
+            var playerColorDiv = $('<div>').addClass('startColor ' + currentColor);
+            colorRow.append(playerColorDiv);
+        }
+        
 
 
     } 
@@ -264,6 +305,10 @@ function winner() {
     if (counter >= 4) {
         modal = true;
         setTimeout(modalWinner, 2000);
+        /**
+         * HACKATHON REVIEW
+         * May want to include sound during this portion to indicate a win
+         */
         return true;
     }
 
